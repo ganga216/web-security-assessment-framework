@@ -1,0 +1,34 @@
+{
+    "target": "https://example.com",
+    "status_code": 200,
+    "technologies": [
+        "Server: cloudflare"
+    ],
+    "findings": [
+        "[HIGH] Missing Content-Security-Policy",
+        "[HIGH] Missing HSTS",
+        "[MEDIUM] Missing X-Frame-Options",
+        "[MEDIUM] Missing X-Content-Type-Options",
+        "[LOW] Missing Referrer-Policy"
+    ],
+    "attack_surface": {
+        "forms": 0,
+        "inputs": 0,
+        "links": 1
+    },
+    "security_score": 35,
+    "owasp_mapping": [
+        "OWASP A05: Security Misconfiguration",
+        "OWASP A03: Injection"
+    ],
+    "mitre_mapping": [
+        "T1059 - Command and Scripting Interpreter",
+        "T1185 - Browser Session Hijacking"
+    ],
+    "recommendations": [
+        "Implement Content-Security-Policy to reduce XSS risks.",
+        "Enable Strict-Transport-Security to enforce HTTPS.",
+        "Enable X-Frame-Options to prevent clickjacking."
+    ],
+    "executive_summary": "High risk. Immediate remediation required."
+}
