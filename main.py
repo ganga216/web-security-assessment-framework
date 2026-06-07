@@ -1,6 +1,8 @@
 from modules.recon import gather_info
 from modules.fingerprint import fingerprint
 from modules.headers import analyze_headers
+from modules.attack_surface import discover_attack_surface
+from modules.risk_engine import calculate_score
 
 url = input("Enter target URL: ")
 
@@ -8,7 +10,7 @@ data = gather_info(url)
 
 if "error" in data:
 
-    print(f"\nError: {data['error']}")
+    print(data["error"])
 
 else:
 
@@ -18,9 +20,9 @@ else:
 
     print("\n===== TECHNOLOGY FINGERPRINTING =====")
 
-    results = fingerprint(data["headers"])
+    tech = fingerprint(data["headers"])
 
-    for item in results:
+    for item in tech:
         print(item)
 
     print("\n===== SECURITY HEADER ANALYSIS =====")
@@ -35,3 +37,19 @@ else:
     else:
 
         print("No missing security headers detected.")
+
+    print("\n===== ATTACK SURFACE DISCOVERY =====")
+
+    surface = discover_attack_surface(url)
+
+    if "error" not in surface:
+
+        print(f"Forms Found : {surface['forms']}")
+        print(f"Inputs Found: {surface['inputs']}")
+        print(f"Links Found : {surface['links']}")
+
+    print("\n===== SECURITY SCORE =====")
+
+    score = calculate_score(findings)
+
+    print(f"Security Score: {score}/100")
