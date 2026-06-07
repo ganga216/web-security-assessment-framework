@@ -1,4 +1,6 @@
-def calculate_score(findings):
+# modules/risk_engine.py
+
+def calculate_score(findings, assets):
 
     score = 100
 
@@ -13,7 +15,7 @@ def calculate_score(findings):
         elif "[LOW]" in finding:
             score -= 5
 
-    if score < 0:
-        score = 0
+    if assets.get("links", 0) > 20:
+        score -= 5
 
-    return score
+    return max(score, 0)
